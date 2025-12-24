@@ -34,7 +34,7 @@ const CreateRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/recipes", form);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/recipes`, form);
       navigate("/");
     } catch (error) {
       alert("Failed to create recipe");

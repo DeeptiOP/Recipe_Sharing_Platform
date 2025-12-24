@@ -21,9 +21,9 @@ const Profile = () => {
   }, [id, currentUser, navigate]);
 
   const handleFollow = async () => {
-    await axios.post(`http://localhost:5000/api/users/${id}/follow`);
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/users/${id}/follow`);
     // Refresh user
-    const res = await axios.get(`http://localhost:5000/api/users/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`);
     setUser(res.data);
   };
 

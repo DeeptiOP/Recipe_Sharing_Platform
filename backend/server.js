@@ -20,7 +20,7 @@ app.use("/api/recipes", recipeRoutes);
 app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.VERCEL) {
   app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
 }
 
