@@ -16,8 +16,22 @@ const Profile = () => {
       navigate("/login");
       return;
     }
-    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`).then(res => setUser(res.data));
-    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}/recipes`).then(res => setRecipes(res.data));
+    if (!import.meta.env.VITE_API_URL) {
+      console.error('VITE_API_URL is not set');
+      return;
+    }
+    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
+      .then(res => setUser(res.data))
+      .catch(err => console.error('Failed to fetch user:', err));
+    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}/recipes`)
+      .then(res => {
+        if (Array.isArray(res.data)) {
+          setRecipes(res.data);
+        } else {
+          console.error('API did not return an array for user recipes');
+        }
+      })
+      .catch(err => console.error('Failed to fetch user recipes:', err));
   }, [id, currentUser, navigate]);
 
   const handleFollow = async () => {

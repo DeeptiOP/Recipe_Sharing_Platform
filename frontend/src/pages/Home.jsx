@@ -8,7 +8,19 @@ const Home = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`).then(res => setRecipes(res.data));
+    if (!import.meta.env.VITE_API_URL) {
+      console.error('VITE_API_URL is not set');
+      return;
+    }
+    axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`)
+      .then(res => {
+        if (Array.isArray(res.data)) {
+          setRecipes(res.data);
+        } else {
+          console.error('API did not return an array for recipes');
+        }
+      })
+      .catch(err => console.error('Failed to fetch recipes:', err));
   }, []);
 
   const filteredRecipes = recipes.filter(r => r.title.toLowerCase().includes(search.toLowerCase()));
