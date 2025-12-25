@@ -16,14 +16,10 @@ const Profile = () => {
       navigate("/login");
       return;
     }
-    if (!import.meta.env.VITE_API_URL) {
-      console.error('VITE_API_URL is not set');
-      return;
-    }
-    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
+    axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/users/${id}`)
       .then(res => setUser(res.data))
       .catch(err => console.error('Failed to fetch user:', err));
-    axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}/recipes`)
+    axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/users/${id}/recipes`)
       .then(res => {
         if (Array.isArray(res.data)) {
           setRecipes(res.data);
@@ -35,9 +31,9 @@ const Profile = () => {
   }, [id, currentUser, navigate]);
 
   const handleFollow = async () => {
-    await axios.post(`${import.meta.env.VITE_API_URL}/api/users/${id}/follow`);
+    await axios.post(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/users/${id}/follow`);
     // Refresh user
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/users/${id}`);
     setUser(res.data);
   };
 

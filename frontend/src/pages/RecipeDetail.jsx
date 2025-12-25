@@ -12,27 +12,27 @@ const RecipeDetail = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`).then(res => setRecipe(res.data));
+    axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}`).then(res => setRecipe(res.data));
   }, [id]);
 
   const handleComment = async () => {
     if (!comment) return;
-    await axios.post(`${import.meta.env.VITE_API_URL}/api/recipes/${id}/comment`, { text: comment });
+    await axios.post(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}/comment`, { text: comment });
     setComment("");
     // Refresh recipe
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}`);
     setRecipe(res.data);
   };
 
   const handleRating = async (newRating) => {
-    await axios.post(`${import.meta.env.VITE_API_URL}/api/recipes/${id}/rate`, { rating: newRating });
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`);
+    await axios.post(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}/rate`, { rating: newRating });
+    const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}`);
     setRecipe(res.data);
   };
 
   const handleLike = async () => {
-    await axios.post(`${import.meta.env.VITE_API_URL}/api/recipes/${id}/like`);
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`);
+    await axios.post(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}/like`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes/${id}`);
     setRecipe(res.data);
   };
 

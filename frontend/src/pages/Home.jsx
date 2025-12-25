@@ -8,11 +8,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (!import.meta.env.VITE_API_URL) {
-      console.error('VITE_API_URL is not set');
-      return;
-    }
-    axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`)
+    axios.get(`${import.meta.env.VITE_API_URL || 'https://recipe-sharing-platform-tw89.onrender.com'}/api/recipes`)
       .then(res => {
         if (Array.isArray(res.data)) {
           setRecipes(res.data);
