@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import recipeRoutes from "./routes/recipes.js";
 import userRoutes from "./routes/users.js";
+import seedDatabase from "./seed.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,16 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/users", userRoutes);
+
+// Seed route for development
+app.post("/api/seed", async (req, res) => {
+  try {
+    await seedDatabase();
+    res.json({ message: "Database seeded successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 if (!process.env.VERCEL) {
