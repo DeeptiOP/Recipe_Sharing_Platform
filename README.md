@@ -12,7 +12,7 @@ backend url:- https://recipe-sharing-platform-tw89.onrender.com
 - Create and share recipes
 - View recipe details
 - User profiles
-- Comments on recipes
+- Comment on recipes 
 
 ## Tech Stack
 
@@ -115,5 +115,6 @@ npm run dev
 - `GET /api/recipes/:id` - Get recipe details
 - `POST /api/recipes/:id/comments` - Add comment (authenticated)
 - `GET /api/users/profile` - Get user profile (authenticated)
+
 
 
