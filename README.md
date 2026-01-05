@@ -1,7 +1,9 @@
 ﻿# Recipe Sharing Platform
 
 A full-stack web application for sharing and discovering recipes.
+
 frontend url:- https://recipe-sharing-platforms.netlify.app/
+
 backend url:- https://recipe-sharing-platform-tw89.onrender.com
 
 ## Features
@@ -113,4 +115,5 @@ npm run dev
 - `GET /api/recipes/:id` - Get recipe details
 - `POST /api/recipes/:id/comments` - Add comment (authenticated)
 - `GET /api/users/profile` - Get user profile (authenticated)
+
 
